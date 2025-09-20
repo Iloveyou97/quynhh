@@ -73,13 +73,44 @@
 </head>
 <body>
 
-  <!-- Nhạc từ GitHub -->
-  <audio autoplay loop>
-    <source src="https://iloveyou97.github.io/quynhh/lamthande.mp3
-" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ phát nhạc.
-  </audio>
+  <!-- Nhạc từ GitHub với overlay chạm bất cứ đâu -->
+<audio id="audio" loop>
+  <source src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/lamthande.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
 
+<!-- Overlay toàn màn hình để bật nhạc khi chạm -->
+<div id="overlay"></div>
+
+<style>
+  /* Overlay full màn hình trong suốt */
+  #overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0); /* trong suốt */
+    z-index: 9999;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+const audio = document.getElementById('audio');
+const overlay = document.getElementById('overlay');
+
+// Thử autoplay
+audio.play().catch(() => {
+  // Nếu bị chặn, hiện overlay
+  overlay.style.display = 'block';
+});
+
+// Khi người dùng chạm overlay, bật nhạc và ẩn overlay
+overlay.addEventListener('click', () => {
+  audio.play();
+  overlay.style.display = 'none';
+});
+</script>
   <!-- Chữ trên ảnh -->
   <div>
     <span class="big-text">✨ Chỉ là beat thôi, nghe chill 😎 ✨</span>
@@ -96,4 +127,5 @@
 
 </body>
 </html>
+
 

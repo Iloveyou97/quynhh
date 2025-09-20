@@ -15,8 +15,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: hidden;
   }
 
+  /* Chữ lớn */
   .big-text {
     font-size: 32px;
     font-weight: bold;
@@ -25,30 +27,47 @@
     opacity: 0;
     animation: fadeIn 1.5s forwards, wave 2s infinite, bling 1.5s infinite;
   }
-
   .big-text:nth-child(1) { animation-delay: 0s, 0s, 0s; }
   .big-text:nth-child(2) { animation-delay: 2s, 2s, 2s; }
   .big-text:nth-child(3) { animation-delay: 4s, 4s, 4s; }
   .big-text:nth-child(4) { animation-delay: 6s, 6s, 6s; }
 
+  /* Ảnh nhịp beat */
   img {
     width: 280px;
     margin: 20px 0;
     animation: beat 1s infinite;
   }
 
+  /* Chữ đỏ */
   p.red-text {
     color: red;
     font-size: 22px;
     font-weight: bold;
   }
 
+  /* Chữ bling-bling dưới */
+  p.bling-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    animation: bling 1.5s infinite;
+    cursor: pointer;
+  }
+
+  /* Keyframes */
   @keyframes fadeIn { from {opacity:0; transform:scale(0.8);} to {opacity:1; transform:scale(1);} }
   @keyframes wave { 0%{transform:rotate(-5deg);}25%{transform:rotate(5deg);}50%{transform:rotate(-5deg);}75%{transform:rotate(5deg);}100%{transform:rotate(-5deg);} }
-  @keyframes bling {0%{color:#ff4d4d;text-shadow:0 0 5px #ff4d4d;}25%{color:#ffff4d;text-shadow:0 0 10px #ffff4d;}50%{color:#4dff4d;text-shadow:0 0 15px #4dff4d;}75%{color:#4d4dff;text-shadow:0 0 10px #4d4dff;}100%{color:#ff4dff;text-shadow:0 0 5px #ff4dff;} }
+  @keyframes bling {
+    0%{color:#ff4d4d;text-shadow:0 0 5px #ff4d4d;}
+    25%{color:#ffff4d;text-shadow:0 0 10px #ffff4d;}
+    50%{color:#4dff4d;text-shadow:0 0 15px #4dff4d;}
+    75%{color:#4d4dff;text-shadow:0 0 10px #4d4dff;}
+    100%{color:#ff4dff;text-shadow:0 0 5px #ff4dff;}
+  }
   @keyframes beat {0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
 
-  /* Overlay full màn hình */
+  /* Overlay fullscreen */
   #overlay {
     position: fixed; top:0; left:0; width:100%; height:100%;
     background: rgba(0,0,0,0);
@@ -67,7 +86,7 @@
 </head>
 <body>
 
-<!-- Chữ -->
+<!-- Chữ lớn -->
 <div>
   <span class="big-text">✨ Chỉ là beat thôi, nghe chill 😎 ✨</span>
   <span class="big-text">🎶 Không có lyric gốc đâu nha 🎶</span>
@@ -75,10 +94,14 @@
   <span class="big-text">👀 Nghe tiếp đi, đừng thoát 👀</span>
 </div>
 
-<!-- Ảnh -->
+<!-- Ảnh troll -->
 <img src="troll_face.jpg" alt="Ảnh troll">
 
+<!-- Chữ đỏ -->
 <p class="red-text">🎉 Chúc mừng bạn, mất mấy giây cuộc đời! 🎉</p>
+
+<!-- Chữ bling-bling dưới -->
+<p class="bling-text">💥 Thử nhấn đúp vào màn hình 💥</p>
 
 <!-- Nhạc -->
 <audio id="audio" loop>
@@ -98,11 +121,11 @@
 const audio = document.getElementById('audio');
 const overlay = document.getElementById('overlay');
 const btn = document.getElementById('btn-audio');
+const blingText = document.querySelector('.bling-text');
 
-// Đảm bảo audio load trước khi click
+// Load audio trước
 audio.load();
 audio.addEventListener('canplaythrough', () => {
-    // Thử autoplay
     audio.play().catch(() => { overlay.style.display = 'block'; });
 });
 
@@ -114,8 +137,18 @@ overlay.addEventListener('click', () => {
 
 // Nút bật/tắt nhạc
 btn.addEventListener('click', () => {
-    if(audio.paused) audio.play();
-    else audio.pause();
+    if(audio.paused){
+        audio.play();
+        btn.textContent = "⏸️ Nhạc";
+    } else {
+        audio.pause();
+        btn.textContent = "🔊 Nhạc";
+    }
+});
+
+// Double click => chữ bling nhấp nháy nhanh hơn
+document.body.addEventListener('dblclick', () => {
+    blingText.style.animation = 'bling 0.5s infinite';
 });
 </script>
 

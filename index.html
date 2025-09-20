@@ -55,7 +55,7 @@
     z-index:9999; cursor:pointer;
   }
 
-  /* Nút audio nhỏ góc trên */
+  /* Nút audio góc trên */
   #audio-controls {
     position: fixed;
     top: 10px;
@@ -76,13 +76,13 @@
 </div>
 
 <!-- Ảnh -->
-<img src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/troll_face.jpg" alt="Ảnh troll">
+<img src="troll_face.jpg" alt="Ảnh troll">
 
 <p class="red-text">🎉 Chúc mừng bạn, mất mấy giây cuộc đời! 🎉</p>
 
 <!-- Nhạc -->
 <audio id="audio" loop>
-  <source src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/lamthande.mp3" type="audio/mpeg">
+  <source src="lamthande.mp3" type="audio/mpeg">
   Trình duyệt của bạn không hỗ trợ phát nhạc.
 </audio>
 
@@ -99,19 +99,23 @@ const audio = document.getElementById('audio');
 const overlay = document.getElementById('overlay');
 const btn = document.getElementById('btn-audio');
 
-// Thử autoplay
-audio.play().catch(() => { overlay.style.display = 'block'; });
+// Đảm bảo audio load trước khi click
+audio.load();
+audio.addEventListener('canplaythrough', () => {
+    // Thử autoplay
+    audio.play().catch(() => { overlay.style.display = 'block'; });
+});
 
 // Overlay click => bật nhạc
 overlay.addEventListener('click', () => {
-  audio.play();
-  overlay.style.display = 'none';
+    audio.play();
+    overlay.style.display = 'none';
 });
 
 // Nút bật/tắt nhạc
 btn.addEventListener('click', () => {
-  if(audio.paused) audio.play();
-  else audio.pause();
+    if(audio.paused) audio.play();
+    else audio.pause();
 });
 </script>
 

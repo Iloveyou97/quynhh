@@ -1,131 +1,119 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>✨ Chill tí thôi ✨</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>✨ Chill tí thôi ✨</title>
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-    .big-text {
-      font-size: 32px; /* chữ nhỏ hơn */
-      font-weight: bold;
-      display: block;
-      margin: 5px 0;
-      opacity: 0;
-      animation: fadeIn 1.5s forwards, wave 2s infinite, bling 1.5s infinite;
-    }
+  .big-text {
+    font-size: 32px;
+    font-weight: bold;
+    display: block;
+    margin: 5px 0;
+    opacity: 0;
+    animation: fadeIn 1.5s forwards, wave 2s infinite, bling 1.5s infinite;
+  }
 
-    /* hiệu ứng lần lượt */
-    .big-text:nth-child(1) { animation-delay: 0s, 0s, 0s; }
-    .big-text:nth-child(2) { animation-delay: 2s, 2s, 2s; }
-    .big-text:nth-child(3) { animation-delay: 4s, 4s, 4s; }
-    .big-text:nth-child(4) { animation-delay: 6s, 6s, 6s; }
+  .big-text:nth-child(1) { animation-delay: 0s, 0s, 0s; }
+  .big-text:nth-child(2) { animation-delay: 2s, 2s, 2s; }
+  .big-text:nth-child(3) { animation-delay: 4s, 4s, 4s; }
+  .big-text:nth-child(4) { animation-delay: 6s, 6s, 6s; }
 
-    img {
-      width: 280px;
-      margin: 20px 0;
-      animation: beat 1s infinite; /* đập nhịp */
-    }
+  img {
+    width: 280px;
+    margin: 20px 0;
+    animation: beat 1s infinite;
+  }
 
-    p.red-text {
-      color: red;
-      font-size: 22px;
-      font-weight: bold;
-    }
+  p.red-text {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to   { opacity: 1; transform: scale(1); }
-    }
+  @keyframes fadeIn { from {opacity:0; transform:scale(0.8);} to {opacity:1; transform:scale(1);} }
+  @keyframes wave { 0%{transform:rotate(-5deg);}25%{transform:rotate(5deg);}50%{transform:rotate(-5deg);}75%{transform:rotate(5deg);}100%{transform:rotate(-5deg);} }
+  @keyframes bling {0%{color:#ff4d4d;text-shadow:0 0 5px #ff4d4d;}25%{color:#ffff4d;text-shadow:0 0 10px #ffff4d;}50%{color:#4dff4d;text-shadow:0 0 15px #4dff4d;}75%{color:#4d4dff;text-shadow:0 0 10px #4d4dff;}100%{color:#ff4dff;text-shadow:0 0 5px #ff4dff;} }
+  @keyframes beat {0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
 
-    @keyframes wave {
-      0% { transform: rotate(-5deg); }
-      25% { transform: rotate(5deg); }
-      50% { transform: rotate(-5deg); }
-      75% { transform: rotate(5deg); }
-      100% { transform: rotate(-5deg); }
-    }
+  /* Overlay full màn hình */
+  #overlay {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0);
+    z-index:9999; cursor:pointer;
+  }
 
-    @keyframes bling {
-      0%   { color: #ff4d4d; text-shadow: 0 0 5px #ff4d4d; }
-      25%  { color: #ffff4d; text-shadow: 0 0 10px #ffff4d; }
-      50%  { color: #4dff4d; text-shadow: 0 0 15px #4dff4d; }
-      75%  { color: #4d4dff; text-shadow: 0 0 10px #4d4dff; }
-      100% { color: #ff4dff; text-shadow: 0 0 5px #ff4dff; }
-    }
-
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-  </style>
+  /* Nút audio nhỏ góc trên */
+  #audio-controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+    color: white;
+  }
+</style>
 </head>
 <body>
 
-  <!-- Nhạc từ GitHub với overlay chạm bất cứ đâu -->
+<!-- Chữ -->
+<div>
+  <span class="big-text">✨ Chỉ là beat thôi, nghe chill 😎 ✨</span>
+  <span class="big-text">🎶 Không có lyric gốc đâu nha 🎶</span>
+  <span class="big-text">😂 Bạn đã mất mấy giây cuộc đời rồi 😂</span>
+  <span class="big-text">👀 Nghe tiếp đi, đừng thoát 👀</span>
+</div>
+
+<!-- Ảnh -->
+<img src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/troll_face.jpg" alt="Ảnh troll">
+
+<p class="red-text">🎉 Chúc mừng bạn, mất mấy giây cuộc đời! 🎉</p>
+
+<!-- Nhạc -->
 <audio id="audio" loop>
   <source src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/lamthande.mp3" type="audio/mpeg">
   Trình duyệt của bạn không hỗ trợ phát nhạc.
 </audio>
 
-<!-- Overlay toàn màn hình để bật nhạc khi chạm -->
+<!-- Overlay để bắt click -->
 <div id="overlay"></div>
 
-<style>
-  /* Overlay full màn hình trong suốt */
-  #overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0); /* trong suốt */
-    z-index: 9999;
-    cursor: pointer;
-  }
-</style>
+<!-- Nút audio góc trên -->
+<div id="audio-controls">
+  <button id="btn-audio">🔊 Nhạc</button>
+</div>
 
 <script>
 const audio = document.getElementById('audio');
 const overlay = document.getElementById('overlay');
+const btn = document.getElementById('btn-audio');
 
 // Thử autoplay
-audio.play().catch(() => {
-  // Nếu bị chặn, hiện overlay
-  overlay.style.display = 'block';
-});
+audio.play().catch(() => { overlay.style.display = 'block'; });
 
-// Khi người dùng chạm overlay, bật nhạc và ẩn overlay
+// Overlay click => bật nhạc
 overlay.addEventListener('click', () => {
   audio.play();
   overlay.style.display = 'none';
 });
+
+// Nút bật/tắt nhạc
+btn.addEventListener('click', () => {
+  if(audio.paused) audio.play();
+  else audio.pause();
+});
 </script>
-  <!-- Chữ trên ảnh -->
-  <div>
-    <span class="big-text">✨ Chỉ là beat thôi, nghe chill 😎 ✨</span>
-    <span class="big-text">🎶 Không có lyric gốc đâu nha 🎶</span>
-    <span class="big-text">😂 Bạn đã mất mấy giây cuộc đời rồi 😂</span>
-    <span class="big-text">👀 Nghe tiếp đi, đừng thoát 👀</span>
-  </div>
-
-  <!-- Ảnh đập nhịp ở giữa -->
-  <img src="https://raw.githubusercontent.com/iloveyou97/quynhh/main/troll_face.jpg" alt="Ảnh troll">
-
-  <!-- Chữ đỏ ở dưới -->
-  <p class="red-text">🎉 Chúc mừng bạn, mất mấy giây cuộc đời! 🎉</p>
 
 </body>
 </html>
-
-
